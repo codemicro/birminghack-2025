@@ -19,7 +19,13 @@ def main():
                 running = False
 
         # fill the screen with a color to wipe away anything from last frame
-        screen.fill("#df3062")
+        screen.fill("lightblue")
+
+        pygame.mouse.set_cursor(*pygame.cursors.arrow)
+
+        button_pressed, _, _ = pygame.mouse.get_pressed()
+        if button_pressed:
+            player_pos = pygame.mouse.get_pos()
 
         pygame.draw.circle(screen, "red", player_pos, 40)
 
