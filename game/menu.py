@@ -20,7 +20,7 @@ class Menu:
         central_button_block = util.center_within(self.surface.get_size(), (250, (self.play_button.size[1] * 2) + gap))
 
         if self.play_button.blit_onto(self.surface, central_button_block):
-            print("Play!!")
+            pygame.event.post(util.make_transition_event("gameplay"))
 
         if self.quit_button.blit_onto(self.surface, util.add_coord(central_button_block, (0, self.play_button.size[1] + gap))):
             pygame.event.post(pygame.event.Event(pygame.QUIT))

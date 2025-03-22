@@ -1,6 +1,10 @@
+from sched import Event
+
 import pygame
 import resources
 import menu
+import util
+
 
 def main():
     # pygame setup
@@ -15,11 +19,13 @@ def main():
     while running:
         # poll for events
         # pygame.QUIT event means the user clicked X to close your window
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
+        for _ in pygame.event.get(eventtype=pygame.QUIT):
+            running = False
 
         # fill the screen with a color to wipe away anything from last frame
+
+        for event in pygame.event.get(eventtype=util.TRANSITION_EVENT_TYPE):
+            raise NotImplementedError("switch to scene " + event.dict["to"])
 
         m.do()
 
