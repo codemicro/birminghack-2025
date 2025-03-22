@@ -18,8 +18,6 @@ def main():
         for _ in pygame.event.get(eventtype=pygame.QUIT):
             running = False
 
-        pygame.mouse.set_cursor(*pygame.cursors.arrow)
-
         for event in pygame.event.get(eventtype=util.TRANSITION_EVENT_TYPE):
             next_scene = event.dict["to"]
             match next_scene:

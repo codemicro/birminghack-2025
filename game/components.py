@@ -4,37 +4,15 @@ import pygame
 import resources
 
 
-class Button:
+class SurfaceButton:
     surface: pygame.SurfaceType
-    text: str
-    size: tuple[int, int]
-    font: pygame.font.Font
     already_pressed: bool
     already_collided: bool
 
-    def __init__(self, text, size, font=resources.FONT_SM):
-        self.surface = pygame.Surface(size)
-        self.surface.fill((255, 0, 255))
-        self.surface.set_colorkey((255, 0, 255))
+    def __init__(self, surface):
+        self.surface = surface
         self.already_pressed = False
         self.already_collided = False
-        self.font = font
-
-        self.text = text
-        self.size = size
-
-        (text_width, text_height) = self.font.size(text)
-        self.text_pos = (
-            (size[0] - text_width) / 2,
-            (size[1] - text_height) / 2,
-        )
-
-    def _draw(self):
-        pygame.draw.rect(self.surface, 0xdf3062, pygame.Rect((0, 0), self.size), border_radius=5)
-        self.surface.blit(
-            self.font.render(self.text, True, "black"),
-            self.text_pos,
-        )
 
     def blit_onto(self, output_surface: pygame.SurfaceType, pos: tuple[int, int]) -> bool:
         """
@@ -44,14 +22,12 @@ class Button:
         :param pos: position to place the button
         :return: if the button is clicked or not - is debounced
         """
-        self._draw()
-
         output_surface.blit(
             self.surface,
             pos
         )
 
-        does_mouse_collide = pygame.Rect(*pos, *self.size).collidepoint(*pygame.mouse.get_pos())
+        does_mouse_collide = pygame.Rect(*pos, *self.surface.get_size()).collidepoint(*pygame.mouse.get_pos())
 
         if does_mouse_collide != self.already_collided:
             self.already_collided = does_mouse_collide
@@ -71,3 +47,23 @@ class Button:
             return False
 
         return False
+
+
+def text_button(text, size, font=resources.FONT_SM) -> SurfaceButton:
+    surface = pygame.Surface(size)
+    surface.fill((255, 0, 255))
+    surface.set_colorkey((255, 0, 255))
+
+    (text_width, text_height) = font.size(text)
+    text_pos = (
+        (size[0] - text_width) / 2,
+        (size[1] - text_height) / 2,
+    )
+
+    pygame.draw.rect(surface, 0xdf3062, pygame.Rect((0, 0), size), border_radius=5)
+    surface.blit(
+        font.render(text, True, "black"),
+        text_pos,
+    )
+
+    return SurfaceButton(surface)
