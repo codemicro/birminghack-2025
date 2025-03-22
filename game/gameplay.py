@@ -6,15 +6,19 @@ import random
 
 class GamePlay:
     surface: pygame.SurfaceType
-    play_button: components.Button
+    play_button: components.SurfaceButton
+    ham_button: components.SurfaceButton
+    tomato_button: components.SurfaceButton
+    lettuce_button: components.SurfaceButton
+    top_button: components.SurfaceButton
 
     def __init__(self, surface):
         self.surface = surface
-        self.play_button = components.Button("Switch", (250, 50))
-        self.ham_button = components.Button('resources/sprites/sub_ham.png', (100, 100))
-        self.tomato_button = components.Button('resources/sprites/sub_tomato.png', (100, 100))
-        self.lettuce_button = components.Button('resources/sprites/sub_lettuce.png', (100, 100))
-        self.top_button = components.Button('resources/sprites/sub_top.png', (100, 100))
+        self.play_button = components.text_button("Switch", (250, 50),  font=resources.FONT)
+        self.ham_button = components.SurfaceButton(resources.SUB_TOMATO_SPRITE)
+        self.tomato_button = components.SurfaceButton(resources.SUB_TOMATO_SPRITE)
+        self.lettuce_button = components.SurfaceButton(resources.SUB_TOMATO_SPRITE)
+        self.top_button = components.SurfaceButton(resources.SUB_TOMATO_SPRITE)
         self.status = "Counter"
         self.newOrder = True
         self.sandwichmade = False
