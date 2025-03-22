@@ -1,41 +1,36 @@
-from sched import Event
-
 import pygame
-import resources
 import menu
 import util
+import gameplay
 
-
+    
 def main():
-    # pygame setup
     pygame.init()
     screen = pygame.display.set_mode((1280, 720))
-    clock = pygame.time.Clock()
     running = True
     pygame.mouse.set_cursor(*pygame.cursors.arrow)
 
-    m = menu.Menu(screen)
+    screen.fill("lightblue")
+
+    active_scene = menu.Menu(screen)
 
     while running:
-        # poll for events
-        # pygame.QUIT event means the user clicked X to close your window
         for _ in pygame.event.get(eventtype=pygame.QUIT):
             running = False
 
-        # fill the screen with a color to wipe away anything from last frame
-
         for event in pygame.event.get(eventtype=util.TRANSITION_EVENT_TYPE):
-            raise NotImplementedError("switch to scene " + event.dict["to"])
+            next_scene = event.dict["to"]
+            match next_scene:
+                case "menu":
+                    active_scene = menu.Menu(screen)
+                case "gameplay":
+                    active_scene = gameplay.GamePlay(screen)
+                case _:
+                    raise NotImplementedError("switch to scene " + event.dict["to"])
+            screen.fill(0x000000)
 
-        m.do()
-
-        # flip() the display to put your work on screen
+        active_scene.do()
         pygame.display.flip()
-
-        # limits FPS to 60
-        # dt is delta time in seconds since last frame, used for framerate-
-        # independent physics.
-        dt = clock.tick(60) / 1000
 
     pygame.quit()
 
