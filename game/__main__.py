@@ -2,7 +2,7 @@ import pygame
 import os
 from pathlib import Path
 import resources
-
+import menu
 
 def main():
     # pygame setup
@@ -12,6 +12,8 @@ def main():
     running = True
 
     player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
+
+    m = menu.Menu(screen)
 
     while running:
         # poll for events
@@ -39,6 +41,8 @@ def main():
             player_pos,
         )
         
+        m.do()
+
         # flip() the display to put your work on screen
         pygame.display.flip()
 
