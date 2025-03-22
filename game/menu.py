@@ -16,14 +16,11 @@ class Menu:
     def do(self):
         self.surface.blit(resources.SPLASH_SCREEN_IMAGE, (0, 0))
 
-        self.play_button.do()
-
         gap = 15
         central_button_block = util.center_within(self.surface.get_size(), (250, (self.play_button.size[1] * 2) + gap))
 
         if self.play_button.blit_onto(self.surface, central_button_block):
             print("Play!!")
 
-        self.quit_button.do()
         if self.quit_button.blit_onto(self.surface, util.add_coord(central_button_block, (0, self.play_button.size[1] + gap))):
             pygame.event.post(pygame.event.Event(pygame.QUIT))
