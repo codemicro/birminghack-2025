@@ -8,8 +8,7 @@ def main():
     screen = pygame.display.set_mode((1280, 720))
     clock = pygame.time.Clock()
     running = True
-
-    player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
+    pygame.mouse.set_cursor(*pygame.cursors.arrow)
 
     m = menu.Menu(screen)
 
@@ -21,24 +20,7 @@ def main():
                 running = False
 
         # fill the screen with a color to wipe away anything from last frame
-        screen.fill("lightblue")
 
-        screen.blit(
-            resources.FONT.render("can i take your order please", True, (0, 0, 0)),
-            (50, 50),
-        )
-
-        pygame.mouse.set_cursor(*pygame.cursors.arrow)
-
-        button_pressed, _, _ = pygame.mouse.get_pressed()
-        if button_pressed:
-            player_pos = pygame.mouse.get_pos()
-
-        screen.blit(
-            resources.TOMATO,
-            player_pos,
-        )
-        
         m.do()
 
         # flip() the display to put your work on screen

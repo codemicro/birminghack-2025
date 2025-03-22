@@ -9,12 +9,14 @@ class Button:
     text: str
     size: tuple[int, int]
     already_pressed: bool
+    already_collided: bool
 
     def __init__(self, text, size):
         self.surface = pygame.Surface(size)
         self.surface.fill((255, 0, 255))
         self.surface.set_colorkey((255, 0, 255))
         self.already_pressed = False
+        self.already_collided = False
 
         self.text = text
         self.size = size
@@ -26,7 +28,7 @@ class Button:
         )
 
     def do(self):
-        pygame.draw.rect(self.surface, 0xdf3062, pygame.Rect((0, 0), self.size), border_radius=3)
+        pygame.draw.rect(self.surface, 0xdf3062, pygame.Rect((0, 0), self.size), border_radius=5)
         self.surface.blit(
             resources.FONT.render(self.text, True, "black"),
             self.text_pos,
@@ -46,6 +48,11 @@ class Button:
         )
 
         does_mouse_collide = pygame.Rect(*pos, *self.size).collidepoint(*pygame.mouse.get_pos())
+
+        if does_mouse_collide != self.already_collided:
+            self.already_collided = does_mouse_collide
+            pygame.mouse.set_cursor(*(pygame.cursors.broken_x if self.already_collided else pygame.cursors.arrow))
+
         if does_mouse_collide:
             (lmb_pressed, _, _) = pygame.mouse.get_pressed(3)
 
