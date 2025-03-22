@@ -3,19 +3,9 @@ import resources
 import random
 import counter
 import menu
+import gameplay
 
-def sandwich(screen):
-    fillings = ["lettuce", "ham", "tomatoes"]
-    amountOfFilling = random.randrange(0,4)
-    sandwich = "bread "
-    for _ in range(amountOfFilling):
-        filling = random.randrange(0,3)
-        sandwich += fillings[filling] + " "
-    sandwich += "bread"
-    screen.blit(            
-        resources.FONT.render(sandwich, True, (0, 0, 0)),
-        (100, 100),
-    )
+
     
 def main():
     # pygame setup
@@ -30,63 +20,36 @@ def main():
     player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
     colour = "lightblue"
     screen.fill("lightblue")
-    c = counter.Counter(screen)
-    status = "Counter"
+    g = gameplay.GamePlay(screen)
     m = menu.Menu(screen)
-
     while running:
+        g.do()
         #Image = Buttonify('resources\sprites\start.png',(100,100),screen)
         # poll for events
         # pygame.QUIT event means the user clicked X to close your window
-        status = c.do(status)   
-        if status == "Food":
-            screen.fill("blue")
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            #elif event.type == pygame.SWITCH:
-             #   status = "Food"
-              #  screen.fill("blue")
-        if event.type == pygame.MOUSEBUTTONDOWN: 
-            #if the mouse is clicked on the 
-            # button the game is terminated 
-            if 10 <= mouse[0] <= 40 and 10 <= mouse[1] <= 40: 
-                if colour == "lightblue":
-                    screen.fill("blue") 
-                    colour = "blue"
-                else:
-                    screen.fill("lightblue") 
-                    colour = "lightblue"
-                    sandwich(screen)
-                    #code if button is pressed goes here
-
-        # fill the screen with a color to wipe away anything from last frame
-        '''if colour == "lightblue":
-            #counter
-        else:
-            #food'''
         
-        
-        mouse = pygame.mouse.get_pos() 
         screen.blit(
             resources.FONT.render("can i take your order please", True, (0, 0, 0)),
             (50, 50),
         )
-        pygame.draw.rect(screen,"green",[10,10,40,40])
+
         pygame.mouse.set_cursor(*pygame.cursors.arrow)
 
         button_pressed, _, _ = pygame.mouse.get_pressed()
         if button_pressed:
             player_pos = pygame.mouse.get_pos()
 
-        screen.blit(
-            resources.TOMATO,
-            player_pos,
-        )
+        #screen.blit(
+         #   resources.TOMATO,
+          #  player_pos,
+        #)
         
 
-        m.do()
+        #m.do()
 
         # flip() the display to put your work on screen
         pygame.display.flip()
