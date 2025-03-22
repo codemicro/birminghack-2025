@@ -36,6 +36,7 @@ class GamePlay:
             position += 50
 
     def do(self):
+        #self.surface.blit(resources.SPLASH_SCREEN_IMAGE, (0, 0))
         #width = self.get_width() 
         #height = self.get_height() 
         #gap = 15
