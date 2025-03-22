@@ -1,5 +1,3 @@
-from sched import Event
-
 import pygame
 import resources
 import menu
