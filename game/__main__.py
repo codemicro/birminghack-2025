@@ -1,9 +1,8 @@
 import pygame
-import os
-from pathlib import Path
 import resources
 import random
 import counter
+import menu
 
 def sandwich(screen):
     fillings = ["lettuce", "ham", "tomatoes"]
@@ -12,7 +11,6 @@ def sandwich(screen):
     for _ in range(amountOfFilling):
         filling = random.randrange(0,3)
         sandwich += fillings[filling] + " "
-
     sandwich += "bread"
     screen.blit(            
         resources.FONT.render(sandwich, True, (0, 0, 0)),
@@ -27,12 +25,15 @@ def main():
     #surface1 = pygame.set_mode((1280,720))
     clock = pygame.time.Clock()
     running = True
+    pygame.mouse.set_cursor(*pygame.cursors.arrow)
 
     player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
     colour = "lightblue"
     screen.fill("lightblue")
     c = counter.Counter(screen)
     status = "Counter"
+    m = menu.Menu(screen)
+
     while running:
         #Image = Buttonify('resources\sprites\start.png',(100,100),screen)
         # poll for events
@@ -84,6 +85,9 @@ def main():
             player_pos,
         )
         
+
+        m.do()
+
         # flip() the display to put your work on screen
         pygame.display.flip()
 
