@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 import resources
 import random
-import Counter
+import counter
 
 def sandwich(screen):
     fillings = ["lettuce", "ham", "tomatoes"]
@@ -23,8 +23,7 @@ def main():
     # pygame setup
     pygame.init()
     screen = pygame.display.set_mode((1280, 720))
-    width = screen.get_width() 
-    height = screen.get_height() 
+    
     #surface1 = pygame.set_mode((1280,720))
     clock = pygame.time.Clock()
     running = True
@@ -32,13 +31,16 @@ def main():
     player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
     colour = "lightblue"
     screen.fill("lightblue")
-    c = Counter.counter(screen)
-    
+    c = counter.Counter(screen)
+    status = "Counter"
     while running:
         #Image = Buttonify('resources\sprites\start.png',(100,100),screen)
         # poll for events
         # pygame.QUIT event means the user clicked X to close your window
-        
+        if status == "Counter":
+            status = c.do(status)   
+        if status == "Food":
+            screen.fill("blue")
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -62,7 +64,6 @@ def main():
             #food'''
         
         
-
         mouse = pygame.mouse.get_pos() 
         screen.blit(
             resources.FONT.render("can i take your order please", True, (0, 0, 0)),
