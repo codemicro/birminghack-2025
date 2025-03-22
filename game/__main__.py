@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 import resources
 import random
+import Counter
 
 def sandwich(screen):
     fillings = ["lettuce", "ham", "tomatoes"]
@@ -31,6 +32,7 @@ def main():
     player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
     colour = "lightblue"
     screen.fill("lightblue")
+    c = Counter.counter(screen)
     
     while running:
         #Image = Buttonify('resources\sprites\start.png',(100,100),screen)
