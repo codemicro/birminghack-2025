@@ -37,13 +37,16 @@ def main():
         #Image = Buttonify('resources\sprites\start.png',(100,100),screen)
         # poll for events
         # pygame.QUIT event means the user clicked X to close your window
-        if status == "Counter":
-            status = c.do(status)   
+        status = c.do(status)   
         if status == "Food":
             screen.fill("blue")
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            #elif event.type == pygame.SWITCH:
+             #   status = "Food"
+              #  screen.fill("blue")
         if event.type == pygame.MOUSEBUTTONDOWN: 
             #if the mouse is clicked on the 
             # button the game is terminated 
