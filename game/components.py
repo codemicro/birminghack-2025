@@ -27,7 +27,7 @@ class Button:
             (size[1] - text_height) / 2,
         )
 
-    def do(self):
+    def _draw(self):
         pygame.draw.rect(self.surface, 0xdf3062, pygame.Rect((0, 0), self.size), border_radius=5)
         self.surface.blit(
             resources.FONT.render(self.text, True, "black"),
@@ -42,6 +42,8 @@ class Button:
         :param pos: position to place the button
         :return: if the button is clicked or not - is debounced
         """
+        self._draw()
+
         output_surface.blit(
             self.surface,
             pos
