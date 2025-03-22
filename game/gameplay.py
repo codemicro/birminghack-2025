@@ -11,8 +11,13 @@ class GamePlay:
     def __init__(self, surface):
         self.surface = surface
         self.play_button = components.Button("Switch", (250, 50))
+        self.ham_button = components.Button('resources/sprites/sub_ham.png', (100, 100))
+        self.tomato_button = components.Button('resources/sprites/sub_tomato.png', (100, 100))
+        self.lettuce_button = components.Button('resources/sprites/sub_lettuce.png', (100, 100))
+        self.top_button = components.Button('resources/sprites/sub_top.png', (100, 100))
         self.status = "Counter"
-        self.orderUp = False
+        self.newOrder = True
+        self.sandwichmade = False
 
     def sandwich(screen):
         fillings = ["lettuce", "ham", "tomatoes"]
@@ -38,7 +43,7 @@ class GamePlay:
 
         if self.play_button.blit_onto(self.surface, (1000, 10)):
             #status = "Food"
-            if self.status == "Counter":
+            if self.status == "Counter" and self.sandwichmade == False:
                 self.surface.fill("blue")
                 self.surface.blit(            
                     resources.FONT.render("Food", True, (0, 0, 0)),
@@ -53,9 +58,19 @@ class GamePlay:
                     (100, 100),
                 )
                 self.status = "Counter"
-                self.orderUp = False
+                self.newOrder = True
 
-        if self.status == "Counter" and self.orderUp == False:
+        if self.status == "Counter" and self.newOrder == True:
             GamePlay.sandwich(self.surface)
-            self.orderUp = True
+            self.newOrder = False
+        elif self.status == "Food":
+            if self.ham_button.blit_onto(self.surface, (100, 250)):
+                print("HAM!")
+            elif self.tomato_button.blit_onto(self.surface, (250, 250)):
+                print("TOMATO!")
+            elif self.lettuce_button.blit_onto(self.surface, (400, 250)):
+                print("LETTUCE!")
+            elif self.top_button.blit_onto(self.surface, (550, 250)):
+                print("TOP!")
+            self.sandwichmade == True
 
