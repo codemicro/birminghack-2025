@@ -12,3 +12,4 @@ FONT_LG = pygame.font.Font(RESOURCES_DIR / "Jersey10-Regular.ttf", size=60)
 FONT_XL = pygame.font.Font(RESOURCES_DIR / "Jersey10-Regular.ttf", size=100)
 
 SPLASH_SCREEN_IMAGE = pygame.image.load(RESOURCES_DIR / "splash.png")
+
