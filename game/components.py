@@ -77,7 +77,7 @@ class Note:
         self.surface = pygame.Surface(base.get_size())
         self.text = text
         self.surface.blit(base, (0, 0))
-        util.render_text_centred_at(text, resources.FONT_SM, 0x000000, base.get_size()[0] / 2, 10, self.surface, base.get_size()[0] - 20)
+        util.render_text_centred_at(text, resources.FONT_SM, 0x000000, base.get_size()[0] / 2, 5, self.surface, base.get_size()[0] - 20)
 
     def blit_onto(self, output_surface: pygame.Surface, pos: tuple[int, int]):
         output_surface.blit(

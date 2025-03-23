@@ -20,7 +20,7 @@ class GamePlay:
         self.surface = surface
         self.menu_button = components.text_button("Menu", (250, 50),  font=resources.FONT)
         self.counter_button = components.text_button("Counter", (250, 50),  font=resources.FONT)
-        self.food_button = components.text_button("Prepare", (250, 50),  font=resources.FONT)
+        self.food_button = components.text_button("Prepare/Next", (250, 50),  font=resources.FONT)
         self.getorder_button = components.text_button("Get Order", (250, 50),  font=resources.FONT)
         self.serve_button = components.text_button("Serve", (250, 50),  font=resources.FONT)
         self.drawer_button = components.text_button(".", (200, 75),  font=resources.FONT)
@@ -36,6 +36,9 @@ class GamePlay:
         self.start = True
         self.suspicion = 0
 
+        self.generate_character()
+
+    def generate_character(self):
         self.character = components.Character(random.choice(resources.SCRIPT_ASK_SANDWICH))
         self.character_pos = (400 + random.randint(0, 100), 100 + random.randint(25, 100))
 
@@ -121,7 +124,7 @@ class GamePlay:
         elif self.status == "Food":
             if self.counter_button.blit_onto(self.surface, (1000, 5)):
                 self.surface.fill("lightgreen")
-                self.character = components.Character(random.choice(resources.SCRIPT_ASK_SANDWICH))
+                self.generate_character()
                 self.character.blit_onto(self.surface, self.character_pos)
                 self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
                 self.status = "Counter"
@@ -150,6 +153,7 @@ class GamePlay:
                     resources.FONT.render("Correct!!", True, (0, 0, 0)),
                     (10, 60),
                     )
+                    self.character.text = random.choice(resources.SCRIPT_TAKE_SANDWICH)
                 else:
                     
                     self.suspicion += 1
@@ -157,6 +161,14 @@ class GamePlay:
                     resources.FONT.render("Incorrect!!", True, (0, 0, 0)),
                     (10, 60),
                     )
+                    self.character.text = random.choice(resources.SCRIPT_TAKE_SANDWICH_RUDE)
+
+                self.character.blit_onto(
+                    self.surface,
+                    self.character_pos
+                )
+                self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0)) # so the customer is under the counter
+
                 message = "Suspicion Levels: " + str(self.suspicion)
                 self.surface.blit(            
                     resources.FONT.render(message, True, (0, 0, 0)),
