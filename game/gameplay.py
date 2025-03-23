@@ -34,7 +34,7 @@ class GamePlay:
         self.start = True
         self.suspicion = 0
 
-        self.character = components.Character()
+        self.character = components.Character(random.choice(resources.SCRIPT_ASK_SANDWICH))
         self.character_pos = (400 + random.randint(0, 100), 100 + random.randint(25, 100))
 
     def displaysandwich(screen, sandwich):
@@ -104,6 +104,7 @@ class GamePlay:
         else:
             if self.counter_button.blit_onto(self.surface, (1000, 5)):
                 self.surface.fill("lightgreen")
+                self.character = components.Character(random.choice(resources.SCRIPT_ASK_SANDWICH))
                 self.character.blit_onto(self.surface, self.character_pos)
                 self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
                 self.status = "Counter"

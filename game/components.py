@@ -69,6 +69,23 @@ def text_button(text, size, font=resources.FONT_SM) -> SurfaceButton:
     return SurfaceButton(surface)
 
 
+class Note:
+    surface: pygame.Surface
+    text: str
+
+    def __init__(self, base: pygame.Surface, text: str):
+        self.surface = pygame.Surface(base.get_size())
+        self.text = text
+        self.surface.blit(base, (0, 0))
+        util.render_text_centred_at(text, resources.FONT_SM, 0x000000, base.get_size()[0] / 2, 10, self.surface, base.get_size()[0] - 20)
+
+    def blit_onto(self, output_surface: pygame.Surface, pos: tuple[int, int]):
+        output_surface.blit(
+            self.surface,
+            pos
+        )
+
+
 class Character:
     torso: pygame.Surface
     head: pygame.Surface
@@ -76,13 +93,19 @@ class Character:
     hair: pygame.Surface
 
     headpos: int
+    text: str | None
+    text_hash: int | None
+    note: Note | None
 
-    def __init__(self):
+    def __init__(self, text: str | None = None):
         self.torso = random.choice(resources.CHARACTER_TORSOS)
         self.head = random.choice(resources.CHARACTER_HEADS)
         self.glasses = random.choice(resources.CHARACTER_GLASSES)
         self.hair = random.choice(resources.CHARACTER_HAIR)
         self.headpos = self.head.get_size()[1] * random.randint(6, 9) / 10
+
+        self.text = text
+        self.note = None
 
     def blit_onto(self, output_surface: pygame.SurfaceType, pos: tuple[int, int]):
         output_surface.blit(self.torso, util.add_coord(pos, (0, self.headpos)))
@@ -91,3 +114,10 @@ class Character:
         if self.head not in resources.CHARACTER_HEADS[-2:]:
             output_surface.blit(self.glasses, util.add_coord(pos, (torso_centerpoint[0], 50)))
             output_surface.blit(self.hair, util.add_coord(pos, (torso_centerpoint[0], 0)))
+
+        if self.text is not None:
+            if self.note is None or hash(self.text) != self.text_hash:
+                self.text_hash = hash(self.text)
+                self.note = Note(resources.EMPTY_NOTE, self.text)
+
+            self.note.blit_onto(output_surface, util.add_coord(pos, (-200, 0)))

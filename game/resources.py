@@ -72,3 +72,9 @@ CHARACTER_HAIR = [
     pygame.image.load(RESOURCES_DIR / "sprites" / "character_hair_3.png"),
     pygame.image.load(RESOURCES_DIR / "sprites" / "character_hair_4.png"), # the bald one
 ]
+
+EMPTY_NOTE = pygame.image.load(RESOURCES_DIR / "empty_note.png")
+
+SCRIPT_ASK_SANDWICH = open(RESOURCES_DIR / "scripts" / "ask-sandwich.txt").read().strip().splitlines()
+SCRIPT_TAKE_SANDWICH = open(RESOURCES_DIR / "scripts" / "take-sandwich.txt").read().strip().splitlines()
+SCRIPT_TAKE_SANDWICH_RUDE = open(RESOURCES_DIR / "scripts" / "take-sandwich-rude.txt").read().strip().splitlines()
