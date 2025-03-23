@@ -13,6 +13,9 @@ class GamePlay:
     lettuce_button: components.SurfaceButton
     top_button: components.SurfaceButton
 
+    character: components.Character
+    character_pos: tuple[int, int]
+
     def __init__(self, surface):
         self.surface = surface
         self.menu_button = components.text_button("Menu", (250, 50),  font=resources.FONT)
@@ -31,6 +34,9 @@ class GamePlay:
         self.start = True
         self.suspicion = 0
 
+        self.character = components.Character()
+        self.character_pos = (400 + random.randint(0, 100), 100 + random.randint(25, 100))
+
     def displaysandwich(screen, sandwich):
         position = 125
         picposition = 100
@@ -41,28 +47,28 @@ class GamePlay:
                 (1110, position),
             )
             if start == 0:
-                screen.blit(            
+                screen.blit(
                     resources.TICKET_TOP_SPRITE_3X,
                     (975, picposition),
                 )
                 start = 1
             elif i == "Lettuce":
-                screen.blit(            
+                screen.blit(
                     resources.TICKET_LETTUCE_SPRITE_3X,
                     (992, picposition + 15),
                 )
             elif i == "Ham":
-                screen.blit(            
+                screen.blit(
                     resources.TICKET_HAM_SPRITE_3X,
                     (975, picposition - 2),
                 )
             elif i == "Tomatoes":
-                screen.blit(            
+                screen.blit(
                     resources.TICKET_TOMATO_SPRITE_3X,
                     (992, picposition + 15),
                 )
             elif i == "Bread":
-                screen.blit(            
+                screen.blit(
                     resources.TICKET_BOTTOM_SPRITE_3X ,
                     (975, picposition),
                 )
@@ -86,7 +92,7 @@ class GamePlay:
             self.surface.fill("lightgreen")
             self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
             self.start = False
-        
+
         if self.menu_button.blit_onto(self.surface, (15, 5)):
             pygame.event.post(util.make_transition_event("menu"))
 
@@ -97,6 +103,7 @@ class GamePlay:
                 self.surface.blit(resources.SUB_BOTTOM_SPRITE_10X, (300, 350))
         else:
             if self.counter_button.blit_onto(self.surface, (1000, 5)):
+                self.character.blit_onto(self.surface, self.character_pos)
                 self.surface.fill("lightgreen")
                 self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
                 self.status = "Counter"
@@ -121,13 +128,13 @@ class GamePlay:
                 #serve
 
                 if self.correctsandwich == list(reversed(self.madesandwich)):
-                    self.surface.blit(            
+                    self.surface.blit(
                     resources.FONT.render("Correct!!", True, (0, 0, 0)),
                     (10, 10),
                     )
                     self.suspicion -= 1
                 else:
-                    self.surface.blit(            
+                    self.surface.blit(
                     resources.FONT.render("Incorrect!!", True, (0, 0, 0)),
                     (10, 10),
                     )

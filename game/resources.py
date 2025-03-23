@@ -55,4 +55,20 @@ CHARACTER_HEADS = [
     pygame.image.load(RESOURCES_DIR / "sprites" / "character_head_1.png"),
     pygame.image.load(RESOURCES_DIR / "sprites" / "character_head_2.png"),
     pygame.image.load(RESOURCES_DIR / "sprites" / "character_head_3.png"),
+    pygame.image.load(RESOURCES_DIR / "sprites" / "character_head_4.png"),
+    pygame.image.load(RESOURCES_DIR / "sprites" / "character_head_5.png"),
+]
+
+CHARACTER_GLASSES = [
+    pygame.image.load(RESOURCES_DIR / "sprites" / "character_glasses_1.png"),
+    pygame.image.load(RESOURCES_DIR / "sprites" / "character_glasses_2.png"),
+    pygame.image.load(RESOURCES_DIR / "sprites" / "character_glasses_3.png"),
+    pygame.image.load(RESOURCES_DIR / "sprites" / "character_glasses_4.png"), # the blank one
+]
+
+CHARACTER_HAIR = [
+    pygame.image.load(RESOURCES_DIR / "sprites" / "character_hair_1.png"),
+    pygame.image.load(RESOURCES_DIR / "sprites" / "character_hair_2.png"),
+    pygame.image.load(RESOURCES_DIR / "sprites" / "character_hair_3.png"),
+    pygame.image.load(RESOURCES_DIR / "sprites" / "character_hair_4.png"), # the bald one
 ]
