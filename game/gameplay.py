@@ -25,10 +25,10 @@ class GamePlay:
         self.serve_button = components.text_button("Serve", (250, 50),  font=resources.FONT)
         self.drawer_button = components.SurfaceButton(resources.DRAWER_TRANS)
         self.draweropen_button = components.SurfaceButton(resources.DRAWER_OPEN)
-        self.ham_button = components.SurfaceButton(resources.SUB_HAM_SPRITE_3X)
-        self.tomato_button = components.SurfaceButton(resources.SUB_TOMATO_SPRITE_3X)
-        self.lettuce_button = components.SurfaceButton(resources.SUB_LETTUCE_SPRITE_3X)
-        self.top_button = components.SurfaceButton(resources.SUB_TOP_SPRITE_3X)
+        self.ham_button = components.SurfaceButton(resources.TUB_HAM_SPRITE)
+        self.tomato_button = components.SurfaceButton(resources.TUB_TOMATO_SPRITE)
+        self.lettuce_button = components.SurfaceButton(resources.TUB_LETTUCE_SPRITE)
+        self.top_button = components.SurfaceButton(resources.TUB_TOP_SPRITE)
         self.status = "Get Order"
         self.newOrder = True
         self.sandwichmade = False
