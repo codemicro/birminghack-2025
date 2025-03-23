@@ -23,6 +23,7 @@ class GamePlay:
         self.food_button = components.text_button("Prepare", (250, 50),  font=resources.FONT)
         self.getorder_button = components.text_button("Get Order", (250, 50),  font=resources.FONT)
         self.serve_button = components.text_button("Serve", (250, 50),  font=resources.FONT)
+        self.drawer_button = components.text_button(".", (200, 75),  font=resources.FONT)
         self.ham_button = components.SurfaceButton(resources.SUB_HAM_SPRITE_3X)
         self.tomato_button = components.SurfaceButton(resources.SUB_TOMATO_SPRITE_3X)
         self.lettuce_button = components.SurfaceButton(resources.SUB_LETTUCE_SPRITE_3X)
@@ -78,7 +79,7 @@ class GamePlay:
 
     def sandwich(self, screen):
         fillings = ["Lettuce", "Ham", "Tomatoes"]
-        amountOfFilling = random.randrange(1,4)
+        amountOfFilling = random.randrange(1,6)
         sandwich = ["Bread"]
         for _ in range(amountOfFilling):
             filling = random.randrange(0,3)
@@ -108,6 +109,9 @@ class GamePlay:
                 self.surface.blit(resources.SUB_BOTTOM_SPRITE_10X, (300, 300))
                 print("click get food serve")
         elif self.status == "Counter" and self.sandwichmade == False:
+            
+            if self.drawer_button.blit_onto(self.surface, (750, 465)):
+                print("Drawer")
             if self.food_button.blit_onto(self.surface, (1000, 5)):
                 self.surface.fill("lightgreen")
                 self.status = "Food"
