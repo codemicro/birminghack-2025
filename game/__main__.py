@@ -25,6 +25,8 @@ def main():
                     active_scene = menu.Menu(screen)
                 case "gameplay":
                     active_scene = gameplay.GamePlay(screen)
+                case "gameover":
+                    active_scene = menu.GameOver(screen)
                 case _:
                     raise NotImplementedError("switch to scene " + event.dict["to"])
             screen.fill(0x000000)

@@ -174,6 +174,8 @@ class GamePlay:
                     resources.FONT.render(message, True, (0, 0, 0)),
                     (10, 85),
                     )
+                if self.suspicion == 3:
+                    pygame.event.post(util.make_transition_event("gameover"))
                 self.madesandwich = ["Bread"]
                 self.correctsandwich = []
                 self.sandwichmade = False

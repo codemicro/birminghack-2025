@@ -65,6 +65,7 @@ CHARACTER_GLASSES = [
     pygame.image.load(RESOURCES_DIR / "sprites" / "character_glasses_2.png"),
     pygame.image.load(RESOURCES_DIR / "sprites" / "character_glasses_3.png"),
     pygame.image.load(RESOURCES_DIR / "sprites" / "character_glasses_4.png"), # the blank one
+    pygame.image.load(RESOURCES_DIR / "sprites" / "character_glasses_5.png"),
 ]
 
 CHARACTER_HAIR = [
@@ -79,3 +80,4 @@ EMPTY_NOTE = pygame.image.load(RESOURCES_DIR / "empty_note.png")
 SCRIPT_ASK_SANDWICH = open(RESOURCES_DIR / "scripts" / "ask-sandwich.txt").read().strip().splitlines()
 SCRIPT_TAKE_SANDWICH = open(RESOURCES_DIR / "scripts" / "take-sandwich.txt").read().strip().splitlines()
 SCRIPT_TAKE_SANDWICH_RUDE = open(RESOURCES_DIR / "scripts" / "take-sandwich-rude.txt").read().strip().splitlines()
+SCRIPT_GAME_OVER = open(RESOURCES_DIR / "scripts" / "game-over.txt").read().strip().splitlines()
