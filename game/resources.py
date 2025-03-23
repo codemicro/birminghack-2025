@@ -13,6 +13,7 @@ FONT_XL = pygame.font.Font(RESOURCES_DIR / "Jersey10-Regular.ttf", size=100)
 
 SPLASH_SCREEN_IMAGE = pygame.image.load(RESOURCES_DIR / "splash.png")
 COUNTER_SCREEN_IMAGE = pygame.image.load(RESOURCES_DIR / "counter.png")
+PREPARE_SCREEN_IMAGE = pygame.image.load(RESOURCES_DIR / "prepare.png")
 
 SUB_TOMATO_SPRITE = pygame.image.load(RESOURCES_DIR / "sprites" / "sub_tomato.png")
 SUB_TOMATO_SPRITE_3X = pygame.transform.scale_by(SUB_TOMATO_SPRITE, 3)
