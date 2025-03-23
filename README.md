@@ -1,6 +1,6 @@
 # Secret Sandwich Service
 
-*Birminghack 1.0 (2025) submission*
+*Birminghack 1.0 (2025) submission - [Devpost](https://devpost.com/software/secret-sandwich-service)*
 
 ## Inspiration
 
