@@ -87,7 +87,9 @@ class GamePlay:
             self.start = False
         
         if self.status == "Counter" and self.sandwichmade == False:
+            print(self.status)
             if self.food_button.blit_onto(self.surface, (1000, 5)):
+                print("in")
                 self.surface.fill("lightgreen")
                 self.status = "Food"
                 self.surface.blit(resources.SUB_BOTTOM_SPRITE_10X, (300, 350))
