@@ -89,7 +89,7 @@ class GamePlay:
         
 
     def do(self):
-        
+        #print(self.status)
         if self.start == True:
             self.surface.fill("lightgreen")
             self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
@@ -100,12 +100,20 @@ class GamePlay:
         if self.menu_button.blit_onto(self.surface, (15, 5)):
             pygame.event.post(util.make_transition_event("menu"))
 
-        if self.status == "Counter" and self.sandwichmade == False:
+        if self.status == "Serve":
             if self.food_button.blit_onto(self.surface, (1000, 5)):
                 self.surface.fill("lightgreen")
                 self.status = "Food"
                 self.surface.blit(resources.PREPARE_SCREEN_IMAGE, (0, 0))
                 self.surface.blit(resources.SUB_BOTTOM_SPRITE_10X, (300, 300))
+                print("click get food serve")
+        elif self.status == "Counter" and self.sandwichmade == False:
+            if self.food_button.blit_onto(self.surface, (1000, 5)):
+                self.surface.fill("lightgreen")
+                self.status = "Food"
+                self.surface.blit(resources.PREPARE_SCREEN_IMAGE, (0, 0))
+                self.surface.blit(resources.SUB_BOTTOM_SPRITE_10X, (300, 300))
+                print("click prepare counter")
         elif self.status == "Food":
             if self.counter_button.blit_onto(self.surface, (1000, 5)):
                 self.surface.fill("lightgreen")
@@ -113,16 +121,13 @@ class GamePlay:
                 self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
                 self.status = "Counter"
                 self.newOrder = True
+                print ("click counter from food")
         elif self.status == "Get Order":
             if self.getorder_button.blit_onto(self.surface, (1000, 5)):
                 self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
                 GamePlay.sandwich(self, self.surface)
                 self.status = "Counter"
-        elif self.status == "Serve":
-            if self.getorder_button.blit_onto(self.surface, (1000, 5)):
-                #self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
-                #GamePlay.sandwich(self, self.surface)
-                self.status = "Counter"
+                print ("click get order ")
 
 
         if self.status == "Food":
