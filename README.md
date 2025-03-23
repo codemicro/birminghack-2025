@@ -12,4 +12,5 @@ Naturally, part of being a good front is to blend in and act like a good, ordina
 
 ## Running
 
-Once you have `uv` installed, use `uv run game/` to play the game.
+1. Install [uv](https://docs.astral.sh/uv)
+2. Run `uv run game/`
