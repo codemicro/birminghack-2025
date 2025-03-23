@@ -41,5 +41,18 @@ TICKET_TOP_SPRITE_3X = pygame.transform.scale_by(TICKET_TOP_SPRITE, 3)
 
 SUB_BOTTOM_SPRITE = pygame.image.load(RESOURCES_DIR / "sprites" / "sub_bottom.png")
 SUB_BOTTOM_SPRITE_10X = pygame.transform.scale_by(SUB_BOTTOM_SPRITE, 10)
+
 TICKET_BOTTOM_SPRITE = pygame.image.load(RESOURCES_DIR / "sprites" / "ticket_bottom.png")
 TICKET_BOTTOM_SPRITE_3X = pygame.transform.scale_by(TICKET_BOTTOM_SPRITE, 3)
+
+CHARACTER_TORSOS = [
+    pygame.image.load(RESOURCES_DIR / "sprites" / "character_torso_1.png"),
+    pygame.image.load(RESOURCES_DIR / "sprites" / "character_torso_2.png"),
+    pygame.image.load(RESOURCES_DIR / "sprites" / "character_torso_3.png"),
+]
+
+CHARACTER_HEADS = [
+    pygame.image.load(RESOURCES_DIR / "sprites" / "character_head_1.png"),
+    pygame.image.load(RESOURCES_DIR / "sprites" / "character_head_2.png"),
+    pygame.image.load(RESOURCES_DIR / "sprites" / "character_head_3.png"),
+]
