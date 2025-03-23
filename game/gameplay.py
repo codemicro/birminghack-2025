@@ -23,11 +23,13 @@ class GamePlay:
         self.food_button = components.text_button("Prepare/Next", (250, 50),  font=resources.FONT)
         self.getorder_button = components.text_button("Get Order", (250, 50),  font=resources.FONT)
         self.serve_button = components.text_button("Serve", (250, 50),  font=resources.FONT)
-        self.drawer_button = components.text_button(".", (200, 75),  font=resources.FONT)
-        self.ham_button = components.SurfaceButton(resources.SUB_HAM_SPRITE_3X)
-        self.tomato_button = components.SurfaceButton(resources.SUB_TOMATO_SPRITE_3X)
-        self.lettuce_button = components.SurfaceButton(resources.SUB_LETTUCE_SPRITE_3X)
-        self.top_button = components.SurfaceButton(resources.SUB_TOP_SPRITE_3X)
+        self.drawer_button = components.SurfaceButton(resources.DRAWER_TRANS)
+        self.draweropen_button = components.SurfaceButton(resources.DRAWER_OPEN)
+        self.ham_button = components.SurfaceButton(resources.TUB_HAM_SPRITE)
+        self.tomato_button = components.SurfaceButton(resources.TUB_TOMATO_SPRITE)
+        self.lettuce_button = components.SurfaceButton(resources.TUB_LETTUCE_SPRITE)
+        self.top_button = components.SurfaceButton(resources.TUB_TOP_SPRITE)
+        #self.cheese_button = components.SurfaceButton(resources.TUB_CHEESE_SPRITE)
         self.status = "Get Order"
         self.newOrder = True
         self.sandwichmade = False
@@ -77,14 +79,21 @@ class GamePlay:
                     resources.TICKET_BOTTOM_SPRITE_3X ,
                     (975, picposition),
                 )
+            ''' elif i == "Cheese":
+                screen.blit(
+                    resources.TICKET_CHEESE_SPRITE_3X ,
+                    (975, picposition),
+                )'''
             picposition +=75
             position += 75
 
     def sandwich(self, screen):
         fillings = ["Lettuce", "Ham", "Tomatoes"]
+        #fillings = ["Lettuce", "Ham", "Tomatoes", "Cheese"]
         amountOfFilling = random.randrange(1,6)
         sandwich = ["Bread"]
         for _ in range(amountOfFilling):
+            #filling = random.randrange(0,4)
             filling = random.randrange(0,3)
             sandwich.append(fillings[filling])
         sandwich.append("Bread")
@@ -95,7 +104,7 @@ class GamePlay:
     def do(self):
         #print(self.status)
         if self.start == True:
-            self.surface.fill("lightgreen")
+            self.surface.blit(resources.BACKGROUND_SCREEN_IMAGE, (0, 0))
             self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
             self.start = False
             self.newOrder = False
@@ -109,21 +118,27 @@ class GamePlay:
                 self.surface.fill("lightgreen")
                 self.status = "Food"
                 self.surface.blit(resources.PREPARE_SCREEN_IMAGE, (0, 0))
+                self.surface.blit(resources.SUB_PAPER_SPRITE_3X, (270, 315))
                 self.surface.blit(resources.SUB_BOTTOM_SPRITE_10X, (300, 300))
                 print("click get food serve")
         elif self.status == "Counter" and self.sandwichmade == False:
             
-            if self.drawer_button.blit_onto(self.surface, (750, 465)):
+            if self.drawer_button.blit_onto(self.surface, (755, 465)):
                 print("Drawer")
+                self.surface.blit(resources.DRAWER_OPEN, (755, 465))
+                if self.draweropen_button.blit_onto(self.surface, (755, 465)):
+                    print("Drawer")
+                    self.drawer_button.blit_onto(self.surface, (755, 465))
             if self.food_button.blit_onto(self.surface, (1000, 5)):
                 self.surface.fill("lightgreen")
                 self.status = "Food"
                 self.surface.blit(resources.PREPARE_SCREEN_IMAGE, (0, 0))
+                self.surface.blit(resources.SUB_PAPER_SPRITE_3X, (270, 315))
                 self.surface.blit(resources.SUB_BOTTOM_SPRITE_10X, (300, 300))
                 print("click prepare counter")
         elif self.status == "Food":
             if self.counter_button.blit_onto(self.surface, (1000, 5)):
-                self.surface.fill("lightgreen")
+                self.surface.blit(resources.BACKGROUND_SCREEN_IMAGE, (0, 0))
                 self.generate_character()
                 self.character.blit_onto(self.surface, self.character_pos)
                 self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
@@ -132,6 +147,7 @@ class GamePlay:
                 print ("click counter from food")
         elif self.status == "Get Order":
             if self.getorder_button.blit_onto(self.surface, (1000, 5)):
+                self.surface.blit(resources.BACKGROUND_SCREEN_IMAGE, (0, 0))
                 self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
                 GamePlay.sandwich(self, self.surface)
                 self.status = "Counter"
@@ -141,8 +157,9 @@ class GamePlay:
         if self.status == "Food":
             if self.serve_button.blit_onto(self.surface, (10, 660)):
                 self.status = "Serve"
-                self.surface.fill("lightgreen")
+                self.surface.blit(resources.BACKGROUND_SCREEN_IMAGE, (0, 0))
                 self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
+                self.surface.blit(resources.SUB_WRAPPED_SPRITE_3X, (350, 300))
                 GamePlay.displaysandwich(self.surface, self.correctsandwich)
                 #serve
 
@@ -202,6 +219,9 @@ class GamePlay:
             elif self.top_button.blit_onto(self.surface, (700, 200)):
                 self.surface.blit(resources.SUB_TOP_SPRITE_10X, (300 + variationlr, 300 + variationud))
                 self.madesandwich.append("Bread")
+            '''elif self.cheese_button.blit_onto(self.surface, (700, 200)):
+                self.surface.blit(resources.SUB_CHEESE_SPRITE_10X, (300 + variationlr, 300 + variationud))
+                self.madesandwich.append("Cheese")'''
             self.sandwichmade == True
 
 
