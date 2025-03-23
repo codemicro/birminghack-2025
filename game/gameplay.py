@@ -108,8 +108,8 @@ class GamePlay:
                 self.surface.blit(resources.SUB_BOTTOM_SPRITE_10X, (300, 300))
         elif self.status == "Food":
             if self.counter_button.blit_onto(self.surface, (1000, 5)):
-                self.character.blit_onto(self.surface, self.character_pos)
                 self.surface.fill("lightgreen")
+                self.character.blit_onto(self.surface, self.character_pos)
                 self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
                 self.status = "Counter"
                 self.newOrder = True
