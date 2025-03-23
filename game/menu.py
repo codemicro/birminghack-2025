@@ -16,7 +16,7 @@ class Menu:
     def do(self):
         self.surface.blit(resources.SPLASH_SCREEN_IMAGE, (0, 0))
 
-        title_text = "SANDWICH"
+        title_text = "Secret Sandwich Service"
 
         self.surface.blit(
             resources.FONT_XL.render(title_text, True, "black"),

@@ -1,7 +1,7 @@
-from operator import truediv
-
+import random
 import pygame
 import resources
+import util
 
 
 class SurfaceButton:
@@ -67,3 +67,27 @@ def text_button(text, size, font=resources.FONT_SM) -> SurfaceButton:
     )
 
     return SurfaceButton(surface)
+
+
+class Character:
+    torso: pygame.Surface
+    head: pygame.Surface
+    glasses: pygame.Surface
+    hair: pygame.Surface
+
+    headpos: int
+
+    def __init__(self):
+        self.torso = random.choice(resources.CHARACTER_TORSOS)
+        self.head = random.choice(resources.CHARACTER_HEADS)
+        self.glasses = random.choice(resources.CHARACTER_GLASSES)
+        self.hair = random.choice(resources.CHARACTER_HAIR)
+        self.headpos = self.head.get_size()[1] * random.randint(6, 9) / 10
+
+    def blit_onto(self, output_surface: pygame.SurfaceType, pos: tuple[int, int]):
+        output_surface.blit(self.torso, util.add_coord(pos, (0, self.headpos)))
+        torso_centerpoint = util.center_within(self.torso.get_size(), self.head.get_size())
+        output_surface.blit(self.head, util.add_coord(pos, (torso_centerpoint[0], 0)))
+        if self.head not in resources.CHARACTER_HEADS[-2:]:
+            output_surface.blit(self.glasses, util.add_coord(pos, (torso_centerpoint[0], 50)))
+            output_surface.blit(self.hair, util.add_coord(pos, (torso_centerpoint[0], 0)))
