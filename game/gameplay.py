@@ -15,7 +15,7 @@ class GamePlay:
 
     def __init__(self, surface):
         self.surface = surface
-        self.switch_button = components.text_button("Switch", (250, 50),  font=resources.FONT)
+        self.menu_button = components.text_button("Menu", (250, 50),  font=resources.FONT)
         self.counter_button = components.text_button("Counter", (250, 50),  font=resources.FONT)
         self.food_button = components.text_button("Prepare", (250, 50),  font=resources.FONT)
         self.serve_button = components.text_button("Serve", (250, 50),  font=resources.FONT)
@@ -29,6 +29,7 @@ class GamePlay:
         self.correctsandwich = []
         self.madesandwich = ["Bread"]
         self.start = True
+        self.suspicion = 0
 
     def displaysandwich(screen, sandwich):
         position = 125
@@ -86,10 +87,11 @@ class GamePlay:
             self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
             self.start = False
         
+        if self.menu_button.blit_onto(self.surface, (15, 5)):
+            pygame.event.post(util.make_transition_event("menu"))
+
         if self.status == "Counter" and self.sandwichmade == False:
-            print(self.status)
             if self.food_button.blit_onto(self.surface, (1000, 5)):
-                print("in")
                 self.surface.fill("lightgreen")
                 self.status = "Food"
                 self.surface.blit(resources.SUB_BOTTOM_SPRITE_10X, (300, 350))
@@ -123,11 +125,13 @@ class GamePlay:
                     resources.FONT.render("Correct!!", True, (0, 0, 0)),
                     (10, 10),
                     )
+                    self.suspicion -= 1
                 else:
                     self.surface.blit(            
                     resources.FONT.render("Incorrect!!", True, (0, 0, 0)),
                     (10, 10),
                     )
+                    self.suspicion += 1
                 self.madesandwich = ["Bread"]
                 self.correctsandwich = []
                 #change to counter button
