@@ -4,6 +4,7 @@ import util
 import resources
 import random
 
+
 class GamePlay:
     surface: pygame.SurfaceType
     play_button: components.SurfaceButton
@@ -25,6 +26,7 @@ class GamePlay:
         self.sandwichmade = False
         self.correctsandwich = []
         self.madesandwich = ["bread"]
+        self.start = True
 
     def displaysandwich(screen, sandwich):
         position = 200
@@ -48,22 +50,27 @@ class GamePlay:
         
 
     def do(self):
+        if self.start == True:
+            self.surface.fill("lightgreen")
+            self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
+            self.start = False
+        
         if self.switch_button.blit_onto(self.surface, (1000, 10)):
             if self.status == "Counter" and self.sandwichmade == False:
                 self.surface.fill("lightgreen")
                 self.status = "Food"
                 self.surface.blit(resources.SUB_BOTTOM_SPRITE_10X, (300, 350))
             else:
+                self.surface.fill("lightgreen")
                 self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
                 self.status = "Counter"
                 self.newOrder = True
 
         if self.serve_button.blit_onto(self.surface, (10, 600)):
+            self.status = "Serve"
+            self.surface.fill("lightgreen")
             self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
             #serve
-            print("serve")
-            print(self.correctsandwich)
-            print(self.madesandwich)
             if self.correctsandwich == self.madesandwich:
                 self.surface.blit(            
                 resources.FONT.render("Correct!!", True, (0, 0, 0)),

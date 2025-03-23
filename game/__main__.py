@@ -2,7 +2,7 @@ import pygame
 import menu
 import util
 import gameplay
-
+import resources
     
 def main():
     pygame.init()
