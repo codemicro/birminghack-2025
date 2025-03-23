@@ -18,11 +18,21 @@ class GamePlay:
 
     def __init__(self, surface):
         self.surface = surface
-        self.menu_button = components.text_button("Menu", (250, 50),  font=resources.FONT)
-        self.counter_button = components.text_button("Counter", (250, 50),  font=resources.FONT)
-        self.food_button = components.text_button("Prepare/Next", (250, 50),  font=resources.FONT)
-        self.getorder_button = components.text_button("Get Order", (250, 50),  font=resources.FONT)
-        self.serve_button = components.text_button("Serve", (250, 50),  font=resources.FONT)
+        self.menu_button = components.text_button(
+            "Menu", (250, 50), font=resources.FONT
+        )
+        self.counter_button = components.text_button(
+            "Counter", (250, 50), font=resources.FONT
+        )
+        self.food_button = components.text_button(
+            "Prepare/Next", (250, 50), font=resources.FONT
+        )
+        self.getorder_button = components.text_button(
+            "Get Order", (250, 50), font=resources.FONT
+        )
+        self.serve_button = components.text_button(
+            "Serve", (250, 50), font=resources.FONT
+        )
         self.drawer_button = components.SurfaceButton(resources.DRAWER_TRANS)
         self.draweropen_button = components.SurfaceButton(resources.DRAWER_OPEN)
         self.ham_button = components.SurfaceButton(resources.TUB_HAM_SPRITE)
@@ -41,15 +51,20 @@ class GamePlay:
         self.generate_character()
 
     def generate_character(self):
-        self.character = components.Character(random.choice(resources.SCRIPT_ASK_SANDWICH))
-        self.character_pos = (400 + random.randint(0, 100), 100 + random.randint(25, 100))
+        self.character = components.Character(
+            random.choice(resources.SCRIPT_ASK_SANDWICH)
+        )
+        self.character_pos = (
+            400 + random.randint(0, 100),
+            100 + random.randint(25, 100),
+        )
 
     def displaysandwich(screen, sandwich):
         position = 125
         picposition = 100
         start = 0
         for i in sandwich:
-            screen.blit(            
+            screen.blit(
                 resources.FONT.render(i, True, (0, 0, 0)),
                 (1110, position),
             )
@@ -76,40 +91,38 @@ class GamePlay:
                 )
             elif i == "Bread":
                 screen.blit(
-                    resources.TICKET_BOTTOM_SPRITE_3X ,
+                    resources.TICKET_BOTTOM_SPRITE_3X,
                     (975, picposition),
                 )
             elif i == "Cheese":
                 screen.blit(
-                    resources.TICKET_CHEESE_SPRITE_3X ,
+                    resources.TICKET_CHEESE_SPRITE_3X,
                     (985, picposition + 15),
                 )
-            picposition +=75
+            picposition += 75
             position += 75
 
     def sandwich(self, screen):
-        #fillings = ["Lettuce", "Ham", "Tomatoes"]
+        # fillings = ["Lettuce", "Ham", "Tomatoes"]
         fillings = ["Lettuce", "Ham", "Tomatoes", "Cheese"]
-        amountOfFilling = random.randrange(1,6)
+        amountOfFilling = random.randrange(1, 6)
         sandwich = ["Bread"]
         for _ in range(amountOfFilling):
-            filling = random.randrange(0,4)
-            #filling = random.randrange(0,3)
+            filling = random.randrange(0, 4)
+            # filling = random.randrange(0,3)
             sandwich.append(fillings[filling])
         sandwich.append("Bread")
         self.correctsandwich = sandwich
         GamePlay.displaysandwich(screen, sandwich)
-        
 
     def do(self):
-        #print(self.status)
+        # print(self.status)
         if self.start == True:
             self.surface.blit(resources.BACKGROUND_SCREEN_IMAGE, (0, 0))
             self.character.blit_onto(self.surface, self.character_pos)
             self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
             self.start = False
             self.newOrder = False
-        
 
         if self.menu_button.blit_onto(self.surface, (15, 5)):
             pygame.event.post(util.make_transition_event("menu"))
@@ -123,7 +136,7 @@ class GamePlay:
                 self.surface.blit(resources.SUB_BOTTOM_SPRITE_10X, (300, 300))
                 print("click get food serve")
         elif self.status == "Counter" and self.sandwichmade == False:
-            
+
             if self.drawer_button.blit_onto(self.surface, (755, 465)):
                 print("Drawer")
                 self.surface.blit(resources.DRAWER_OPEN, (755, 465))
@@ -145,15 +158,14 @@ class GamePlay:
                 self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
                 self.status = "Counter"
                 self.newOrder = True
-                print ("click counter from food")
+                print("click counter from food")
         elif self.status == "Get Order":
             if self.getorder_button.blit_onto(self.surface, (1000, 5)):
                 self.surface.blit(resources.BACKGROUND_SCREEN_IMAGE, (0, 0))
                 self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
                 GamePlay.sandwich(self, self.surface)
                 self.status = "Counter"
-                print ("click get order ")
-
+                print("click get order ")
 
         if self.status == "Food":
             if self.serve_button.blit_onto(self.surface, (10, 660)):
@@ -162,70 +174,80 @@ class GamePlay:
                 self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
                 self.surface.blit(resources.SUB_WRAPPED_SPRITE_3X, (350, 300))
                 GamePlay.displaysandwich(self.surface, self.correctsandwich)
-                #serve
+                # serve
 
                 if self.correctsandwich == list(reversed(self.madesandwich)):
                     if self.suspicion > 0:
                         self.suspicion -= 1
-                    self.surface.blit(            
-                    resources.FONT.render("Correct!!", True, (0, 0, 0)),
-                    (10, 60),
+                    self.surface.blit(
+                        resources.FONT.render("Correct!!", True, (0, 0, 0)),
+                        (10, 60),
                     )
                     self.character.text = random.choice(resources.SCRIPT_TAKE_SANDWICH)
                 else:
-                    
-                    self.suspicion += 1
-                    self.surface.blit(            
-                    resources.FONT.render("Incorrect!!", True, (0, 0, 0)),
-                    (10, 60),
-                    )
-                    self.character.text = random.choice(resources.SCRIPT_TAKE_SANDWICH_RUDE)
 
-                self.character.blit_onto(
-                    self.surface,
-                    self.character_pos
-                )
-                self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0)) # so the customer is under the counter
+                    self.suspicion += 1
+                    self.surface.blit(
+                        resources.FONT.render("Incorrect!!", True, (0, 0, 0)),
+                        (10, 60),
+                    )
+                    self.character.text = random.choice(
+                        resources.SCRIPT_TAKE_SANDWICH_RUDE
+                    )
+
+                self.character.blit_onto(self.surface, self.character_pos)
+                self.surface.blit(
+                    resources.COUNTER_SCREEN_IMAGE, (0, 0)
+                )  # so the customer is under the counter
 
                 message = "Suspicion Levels: " + str(self.suspicion)
-                self.surface.blit(            
+                self.surface.blit(
                     resources.FONT.render(message, True, (0, 0, 0)),
                     (10, 85),
-                    )
+                )
                 if self.suspicion == 3:
                     pygame.event.post(util.make_transition_event("gameover"))
                 self.madesandwich = ["Bread"]
                 self.correctsandwich = []
                 self.sandwichmade = False
-                #self.status = "Get Order"
-                #change to counter button
-                #if suspician is over 5 then ooooooo game over?
+                # self.status = "Get Order"
+                # change to counter button
+                # if suspician is over 5 then ooooooo game over?
 
         if self.status == "Counter" and self.newOrder == True:
             GamePlay.sandwich(self, self.surface)
             self.newOrder = False
-        elif self.status == "Food" :
+        elif self.status == "Food":
             GamePlay.displaysandwich(self.surface, self.correctsandwich)
-            variationlr = random.randrange(0,15)
-            variationud = random.randrange(0,15)
+            variationlr = random.randrange(0, 15)
+            variationud = random.randrange(0, 15)
             if self.ham_button.blit_onto(self.surface, (100, 200)):
-                self.surface.blit(resources.SUB_HAM_SPRITE_10X, (300 + variationlr, 300 + variationud))
+                self.surface.blit(
+                    resources.SUB_HAM_SPRITE_10X, (300 + variationlr, 300 + variationud)
+                )
                 self.madesandwich.append("Ham")
             elif self.tomato_button.blit_onto(self.surface, (300, 200)):
-                self.surface.blit(resources.SUB_TOMATO_SPRITE_10X, (300 + variationlr, 300 + variationud))
+                self.surface.blit(
+                    resources.SUB_TOMATO_SPRITE_10X,
+                    (300 + variationlr, 300 + variationud),
+                )
                 self.madesandwich.append("Tomatoes")
             elif self.lettuce_button.blit_onto(self.surface, (500, 200)):
-                self.surface.blit(resources.SUB_LETTUCE_SPRITE_10X, (300 + variationlr, 300 + variationud))
+                self.surface.blit(
+                    resources.SUB_LETTUCE_SPRITE_10X,
+                    (300 + variationlr, 300 + variationud),
+                )
                 self.madesandwich.append("Lettuce")
-            
+
             elif self.cheese_button.blit_onto(self.surface, (700, 200)):
-                self.surface.blit(resources.SUB_CHEESE_SPRITE_10X, (330 + variationlr, 335 + variationud))
+                self.surface.blit(
+                    resources.SUB_CHEESE_SPRITE_10X,
+                    (330 + variationlr, 335 + variationud),
+                )
                 self.madesandwich.append("Cheese")
             elif self.top_button.blit_onto(self.surface, (800, 200)):
-                self.surface.blit(resources.SUB_TOP_SPRITE_10X, (300 + variationlr, 300 + variationud))
+                self.surface.blit(
+                    resources.SUB_TOP_SPRITE_10X, (300 + variationlr, 300 + variationud)
+                )
                 self.madesandwich.append("Bread")
             self.sandwichmade == True
-
-
-
-

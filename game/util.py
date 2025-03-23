@@ -8,7 +8,9 @@ def add_coord(a: tuple[int, int], b: tuple[int, int]) -> tuple[int, int]:
     )
 
 
-def center_within(canvas_size: tuple[int, int], thing_size: tuple[int, int]) -> tuple[int, int]:
+def center_within(
+    canvas_size: tuple[int, int], thing_size: tuple[int, int]
+) -> tuple[int, int]:
     return (
         int((canvas_size[0] - thing_size[0]) / 2),
         int((canvas_size[1] - thing_size[1]) / 2),
@@ -19,10 +21,7 @@ TRANSITION_EVENT_TYPE = 50123
 
 
 def make_transition_event(to: str) -> pygame.event.Event:
-    return pygame.event.Event(
-        TRANSITION_EVENT_TYPE,
-        {"to": to}
-    )
+    return pygame.event.Event(TRANSITION_EVENT_TYPE, {"to": to})
 
 
 def render_text_centred_at(text, font, colour, x, y, screen, allowed_width):
@@ -36,12 +35,12 @@ def render_text_centred_at(text, font, colour, x, y, screen, allowed_width):
         line_words = []
         while len(words) > 0:
             line_words.append(words.pop(0))
-            fw, fh = font.size(' '.join(line_words + words[:1]))
+            fw, fh = font.size(" ".join(line_words + words[:1]))
             if fw > allowed_width:
                 break
 
         # add a line consisting of those words
-        line = ' '.join(line_words)
+        line = " ".join(line_words)
         lines.append(line)
 
     # now we've split our text into lines that fit into the width, actually
