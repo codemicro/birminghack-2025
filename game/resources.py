@@ -11,9 +11,17 @@ FONT = pygame.font.Font(RESOURCES_DIR / "Jersey10-Regular.ttf", size=40)
 FONT_LG = pygame.font.Font(RESOURCES_DIR / "Jersey10-Regular.ttf", size=60)
 FONT_XL = pygame.font.Font(RESOURCES_DIR / "Jersey10-Regular.ttf", size=100)
 
+DRAWER_TRANS = pygame.image.load(RESOURCES_DIR / "drawer_button.png")
+DRAWER_OPEN = pygame.image.load(RESOURCES_DIR / "drawer.png")
+
 SPLASH_SCREEN_IMAGE = pygame.image.load(RESOURCES_DIR / "splash.png")
 COUNTER_SCREEN_IMAGE = pygame.image.load(RESOURCES_DIR / "counter.png")
 PREPARE_SCREEN_IMAGE = pygame.image.load(RESOURCES_DIR / "prepare.png")
+BACKGROUND_SCREEN_IMAGE = pygame.image.load(RESOURCES_DIR / "background.png")
+SUB_WRAPPED_SPRITE = pygame.image.load(RESOURCES_DIR / "sprites" / "sub_wrapped.png")
+SUB_WRAPPED_SPRITE_3X = pygame.transform.scale_by(SUB_WRAPPED_SPRITE, 5)
+SUB_PAPER_SPRITE =  pygame.image.load(RESOURCES_DIR / "sprites" / "sub_wrap.png")
+SUB_PAPER_SPRITE_3X = pygame.transform.scale_by(SUB_PAPER_SPRITE, 6)
 
 SUB_TOMATO_SPRITE = pygame.image.load(RESOURCES_DIR / "sprites" / "sub_tomato.png")
 SUB_TOMATO_SPRITE_3X = pygame.transform.scale_by(SUB_TOMATO_SPRITE, 3)
