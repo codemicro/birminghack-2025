@@ -105,6 +105,7 @@ class GamePlay:
         #print(self.status)
         if self.start == True:
             self.surface.blit(resources.BACKGROUND_SCREEN_IMAGE, (0, 0))
+            self.character.blit_onto(self.surface, self.character_pos)
             self.surface.blit(resources.COUNTER_SCREEN_IMAGE, (0, 0))
             self.start = False
             self.newOrder = False
