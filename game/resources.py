@@ -49,10 +49,10 @@ TICKET_LETTUCE_SPRITE = pygame.image.load(RESOURCES_DIR / "sprites" / "ticket_le
 TICKET_LETTUCE_SPRITE_3X = pygame.transform.scale_by(TICKET_LETTUCE_SPRITE, 2)
 
 SUB_CHEESE_SPRITE = pygame.image.load(RESOURCES_DIR / "sprites" / "sub_cheese.png")
-SUB_CHEESE_SPRITE_3X = pygame.transform.scale_by(SUB_LETTUCE_SPRITE, 3)
-SUB_CHEESE_SPRITE_10X = pygame.transform.scale_by(SUB_LETTUCE_SPRITE, 10)
+SUB_CHEESE_SPRITE_3X = pygame.transform.scale_by(SUB_CHEESE_SPRITE, 3)
+SUB_CHEESE_SPRITE_10X = pygame.transform.scale_by(SUB_CHEESE_SPRITE, 6)
 TUB_CHEESE_SPRITE = pygame.image.load(RESOURCES_DIR / "sprites" / "tub_cheese.png")
-TUB_CHEESE_SPRITE_3X = pygame.transform.scale_by(TUB_LETTUCE_SPRITE, 3)
+TUB_CHEESE_SPRITE_3X = pygame.transform.scale_by(TUB_CHEESE_SPRITE, 3)
 TICKET_CHEESE_SPRITE = pygame.image.load(RESOURCES_DIR / "sprites" / "ticket_cheese.png")
 TICKET_CHEESE_SPRITE_3X = pygame.transform.scale_by(TICKET_CHEESE_SPRITE, 2)
 
