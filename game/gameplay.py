@@ -137,12 +137,12 @@ class GamePlay:
                 print("click get food serve")
         elif self.status == "Counter" and self.sandwichmade == False:
 
-            if self.drawer_button.blit_onto(self.surface, (755, 465)):
+            if self.drawer_button.blit_onto(self.surface, (753, 470)):
                 print("Drawer")
-                self.surface.blit(resources.DRAWER_OPEN, (755, 465))
-                if self.draweropen_button.blit_onto(self.surface, (755, 465)):
+                self.surface.blit(resources.DRAWER_OPEN, (753, 470)) #moved drawer to correct position
+                if self.draweropen_button.blit_onto(self.surface, (753, 470)):
                     print("Drawer")
-                    self.drawer_button.blit_onto(self.surface, (755, 465))
+                    self.drawer_button.blit_onto(self.surface, (753, 470))
             if self.food_button.blit_onto(self.surface, (1000, 5)):
                 self.surface.fill("lightgreen")
                 self.status = "Food"
@@ -198,7 +198,8 @@ class GamePlay:
                 self.character.blit_onto(self.surface, self.character_pos)
                 self.surface.blit(
                     resources.COUNTER_SCREEN_IMAGE, (0, 0)
-                )  # so the customer is under the counter
+                ) # so the customer is under the counter
+                self.surface.blit(resources.SUB_WRAPPED_SPRITE_3X, (350, 300)) #so the sub is back on top of the counter
 
                 message = "Suspicion Levels: " + str(self.suspicion)
                 self.surface.blit(

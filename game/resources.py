@@ -112,7 +112,7 @@ CHARACTER_HAIR = [
     ),  # the bald one
 ]
 
-EMPTY_NOTE = pygame.image.load(RESOURCES_DIR / "empty_note.png")
+EMPTY_NOTE = pygame.image.load(RESOURCES_DIR / "empty_note.png") 
 
 SCRIPT_ASK_SANDWICH = (
     open(RESOURCES_DIR / "scripts" / "ask-sandwich.txt").read().strip().splitlines()
@@ -121,10 +121,7 @@ SCRIPT_TAKE_SANDWICH = (
     open(RESOURCES_DIR / "scripts" / "take-sandwich.txt").read().strip().splitlines()
 )
 SCRIPT_TAKE_SANDWICH_RUDE = (
-    open(RESOURCES_DIR / "scripts" / "take-sandwich-rude.txt")
-    .read()
-    .strip()
-    .splitlines()
+    open(RESOURCES_DIR / "scripts" / "take-sandwich-rude.txt").read().strip().splitlines()
 )
 SCRIPT_GAME_OVER = (
     open(RESOURCES_DIR / "scripts" / "game-over.txt").read().strip().splitlines()
